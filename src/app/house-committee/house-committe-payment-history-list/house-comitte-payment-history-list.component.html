@@ -1,0 +1,11 @@
+<app-house-committee></app-house-committee>
+<select [(ngModel)]="selectedTenant">
+  <option value="">אנא בחר מספר דירה</option>
+    <option *ngFor="let tenant of tenantsList" [ngValue]="tenant">{{ tenant.apartment_number }}</option>
+
+</select>
+
+<button (click)="selectOption()">אישור</button>
+
+<p> {{ selectedTenant.name}} {{ selectedTenant.apartment_number }}</p>
+

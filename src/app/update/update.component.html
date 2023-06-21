@@ -1,0 +1,16 @@
+<app-tenant></app-tenant>
+<table class="styled-table">
+  <thead>
+  <tr>
+    <th>מספר הודעה</th>
+    <th>תוכן ההודעה</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let message of messageList">
+    <td>{{ message.message_id }}</td>
+    <td>{{ message.message }}</td>
+  </tr>
+  </tbody>
+</table>

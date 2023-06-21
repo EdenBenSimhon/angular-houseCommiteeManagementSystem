@@ -1,0 +1,24 @@
+<div class="align-center">
+  <h2>התחברות הדיירים</h2>
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <input
+      placeholder="אימייל"
+      type="email"
+      name="email"
+      [(ngModel)]="user.email"
+      required
+      email
+    />
+    <input
+      placeholder="סיסמה"
+      type="password"
+      name="password"
+      [(ngModel)]="user.password"
+    />
+    <div class="btn-div">
+      <button type="submit"  class="login-btn">
+        Login
+      </button>
+    </div>
+  </form>
+</div>

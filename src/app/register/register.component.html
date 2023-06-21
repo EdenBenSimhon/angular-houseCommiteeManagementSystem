@@ -1,0 +1,37 @@
+<app-house-committee></app-house-committee>
+<div class="align-center">
+  <h2>רישום דיירים</h2>
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <input
+      placeholder="אימייל"
+      type="email"
+      name="email"
+      [(ngModel)]="tempTenant.email"
+      required
+      email
+    />
+    <input
+      placeholder="סיסמה"
+      type="password"
+      name="password"
+      [(ngModel)]="tempTenant.password"
+    />
+    <input
+      placeholder="שם פרטי ומשפחה"
+      type="text"
+      name="name"
+      [(ngModel)]="tempTenant.name"
+    />
+    <input
+      placeholder="מספר דירה"
+      type="text"
+      name="apartmentNumber"
+      [(ngModel)]="tempTenant.apartmentNumber"
+    />
+    <div class="btn-div">
+      <button type="submit"  class="login-btn">
+        submit
+      </button>
+    </div>
+  </form>
+</div>

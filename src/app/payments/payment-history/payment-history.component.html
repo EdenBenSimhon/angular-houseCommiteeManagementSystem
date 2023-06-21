@@ -1,0 +1,22 @@
+<app-tenant></app-tenant>
+
+<table class="styled-table">
+  <thead>
+  <tr>
+    <th>שם פרטי</th>
+    <th>מספר דירה</th>
+    <th>כתובת</th>
+    <th>סכום התשלום</th>
+    <th>תאריך התשלום</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let payment of paymentHistoryList">
+    <td>{{ payment.name }}</td>
+    <td>{{ payment.apartmentNumber }}</td>
+    <td>{{ payment.address }}</td>
+    <td>{{ payment.paymentAmount }}</td>
+    <td>{{ payment.historyPayment }}</td>
+  </tr>
+  </tbody>
+</table>
