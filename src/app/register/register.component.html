@@ -1,0 +1,53 @@
+<app-house-committee></app-house-committee>
+<div class="align-center">
+  <h2>אנא בחר דייר מהרשימה על מנת להסיר אותו</h2>
+  <label>שם הדייר ומספר הדירה
+  <select [(ngModel)]="registerService.selectedTenantToDelete">
+    <option *ngFor="let tenant of registerService.tenantsList" [ngValue]="tenant">{{ tenant.name }}  , {{tenant.apartment_number}}</option>
+  </select>
+  </label>
+
+  <div class ="btn-div">
+    <h1></h1>
+  <button class="login-btn" (click)="registerService.deleteTenant()">הסר</button>
+</div>
+  <h2>רישום דיירים</h2>
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit()" >
+    <input
+      placeholder="אימייל"
+      id="email"
+      type="email"
+      name="email"
+      [(ngModel)]="tempTenant.email"
+      required
+      email
+    />
+    <input
+      placeholder="סיסמה"
+      type="password"
+      name="password"
+      [(ngModel)]="tempTenant.password"
+      required minlength="6"
+    />
+    <input
+      placeholder="שם פרטי ומשפחה"
+      type="text"
+      name="name"
+      [(ngModel)]="tempTenant.name"
+      required
+    />
+    <input
+      placeholder="מספר דירה"
+      type="number"
+      name="apartmentNumber"
+      [(ngModel)]="tempTenant.apartmentNumber"
+      required
+    />
+    <div class="btn-div">
+      <button type="submit" [disabled]="!registerForm.valid" class="login-btn">
+        submit
+      </button>
+    </div>
+  </form>
+  <p *ngIf="registerService.errorMessage">The user already exists</p>
+</div>

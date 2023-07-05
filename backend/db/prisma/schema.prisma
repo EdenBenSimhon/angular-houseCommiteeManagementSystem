@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  name  String? @db.VarChar(255)
+  email String  @unique @db.VarChar(255)
+}
+
+model apartments {
+  address          String @db.VarChar(255)
+  apartment_number Int    @id
+  number_of_rooms  Int
+  payment_amount   Int
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model payments {
+  payment_id       Int   @id @default(autoincrement())
+  apartment_number Int
+  number_of_rooms  Int
+  payment_date     DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+
+}
+
+model tenants {
+  email            String  @id @unique @db.VarChar(255)
+  password         String  @db.VarChar(255)
+  name             String  @db.VarChar(255)
+  apartment_number Int     @unique
+  admin            Boolean
+}
+
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model update {
+  message_id Int     @id @default(autoincrement())
+  message    String? @unique @db.VarChar(1024)
+
+}
