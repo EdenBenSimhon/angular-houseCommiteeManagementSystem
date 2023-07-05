@@ -3,10 +3,13 @@ import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../auth/auth.service";
 import {PaymentHistoryService} from "../payments/payment-history/payment-hisotry.service";
+import {Subject} from "rxjs";
 
 export class HouseCommitteeService {
 
   tenantsList : any =[]
+  activatedEmitter =  new Subject<boolean>;
+
   constructor(private router: Router, private httpClient: HttpClient,private paymentHistoryService : PaymentHistoryService) {
   }
 

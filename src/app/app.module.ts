@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TenantComponent } from './tenant/tenant.component';
 import { HouseCommitteeComponent } from './house-committee/house-committee.component';
 import { PaymentsComponent } from './payments/payments.component';
@@ -15,8 +15,16 @@ import {AuthService} from "./auth/auth.service";
 import { RegisterComponent } from './register/register.component';
 import {
   HouseCommitteePaymentHistoryListComponent
-} from "./house-committee/house-committe-payment-history-list/house-comitte-payment-history-list.component";
+} from "./house-committee/house-committee-payment-history-list/house-committee-payment-history-list.component";
 import { CreateUpdateComponent } from './house-committee/create-update/create-update.component';
+import {CreateUpdateDirective} from "./house-committee/create-update/create-update.directive";
+import { PaymentsDirective } from './payments/payments.directive';
+import { UnlessDirective } from './unless.directive';
+import {shortenPipe} from "./payments/payment-history/payment-history.pipe";
+import { CommonModule } from "@angular/common";
+import { NgxPayPalModule } from 'ngx-paypal';
+import { PaypalComponent } from './payments/paypal/paypal.component';
+
 
 const  appRoutes:Routes = [
   {path:'login',component:LoginComponent} ,
@@ -28,6 +36,7 @@ const  appRoutes:Routes = [
   {path:'register',component:RegisterComponent,canActivate: [AuthGuard]},
   {path:'housecommittepaymenthistorylist', component:HouseCommitteePaymentHistoryListComponent,canActivate : [AuthGuard]},
   {path:'createupdate', component:CreateUpdateComponent,canActivate : [AuthGuard]},
+
 ]
 @NgModule({
   declarations: [
@@ -40,14 +49,21 @@ const  appRoutes:Routes = [
     UpdateComponent,
     RegisterComponent,
     HouseCommitteePaymentHistoryListComponent,
-    CreateUpdateComponent
+    CreateUpdateComponent,
+    CreateUpdateDirective,
+    PaymentsDirective,
+    UnlessDirective,
+    shortenPipe,
+    PaypalComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
-
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
+    CommonModule,
+    NgxPayPalModule
   ],
   providers: [AuthGuard,AuthService],
   bootstrap: [AppComponent]

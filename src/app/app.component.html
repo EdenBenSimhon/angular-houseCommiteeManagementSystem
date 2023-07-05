@@ -1,5 +1,17 @@
 <div class="header">
-  <p class="title">ברוכים הבאים למערכת ניהול ועד הבית</p>
+  <div *ngIf="userLogin">
+    {{updateMessage}}
+  </div>
+  <div *ngIf="!userLogin">
+    {{welcomeMessage}}
+  </div>
 </div>
 
+  <!--switch case-->
+<!--<div [ngSwitch]="value">-->
+<!--  <p *ngSwitchCase = "5">the value is 5</p>-->
+<!--  <p *ngSwitchCase = "10">the value is 10</p>-->
+<!--  <p *ngSwitchCase = "11">the value is 11</p>-->
+<!--  <p *ngSwitchDefault = "12">the value is default</p>-->
+<!--</div>-->
 <router-outlet></router-outlet>

@@ -12,27 +12,27 @@ import {PaymentHistoryService} from "../payments/payment-history/payment-hisotry
 })
 export class HouseCommitteeComponent {
   tenantsList: any = []
-  selectedTenant: any ;
-  paymentHistory : boolean =false;
-  createUpdate : boolean = false;
-  constructor(private router: Router, private authService: AuthService, private httpClient: HttpClient,private paymentHistoryService :PaymentHistoryService) {
+  selectedTenant: any;
+  paymentHistory: boolean = false;
+  createUpdate: boolean = false;
+
+  constructor(private router: Router, private authService: AuthService, private httpClient: HttpClient, private paymentHistoryService: PaymentHistoryService) {
   }
 
   handleButtonClick(selectedOption: string): void {
-        this.router.navigate(['/' + selectedOption]);
+    this.router.navigate(['/' + selectedOption]);
   }
 
   logout() {
     this.authService.logout();
   }
 
-
+  //
+  // public onActive(){
+  //   this.house.activatedEmitter.next(true);
+  // }
 
   public selectOption(tenant: any) {
     this.selectedTenant = tenant;
-  }
-
-  public selectedOption(tenant: any){
-  console.log(tenant)
   }
 }

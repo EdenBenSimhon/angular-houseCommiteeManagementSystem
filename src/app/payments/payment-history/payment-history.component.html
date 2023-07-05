@@ -1,5 +1,4 @@
-<app-tenant></app-tenant>
-
+<app-tenant *ngIf="showNavBarFromParent"></app-tenant>
 <table class="styled-table">
   <thead>
   <tr>
@@ -11,12 +10,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let payment of paymentHistoryList">
-    <td>{{ payment.name }}</td>
+  <tr *ngFor="let payment of paymentHistoryService.paymentHistoryList">
+    <td>{{ payment.name |shorten:6}}</td>
     <td>{{ payment.apartmentNumber }}</td>
-    <td>{{ payment.address }}</td>
+    <td>{{ payment.address  }}</td>
     <td>{{ payment.paymentAmount }}</td>
-    <td>{{ payment.historyPayment }}</td>
+    <td>{{ payment.historyPayment | date:'fullDate' }}</td>
   </tr>
   </tbody>
 </table>

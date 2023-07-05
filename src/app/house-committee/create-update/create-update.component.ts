@@ -1,5 +1,6 @@
-import {Component, Input, Output} from '@angular/core';
+import {Component, Input, Output, ViewChild} from '@angular/core';
 import {CreateUpdateService} from "./create-update.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-create-update',
@@ -7,9 +8,11 @@ import {CreateUpdateService} from "./create-update.service";
   styleUrls: ['./create-update.component.css']
 })
 export class CreateUpdateComponent {
-  @Output() inputMessage : any  ;
-  clickButton :boolean = false;
-  constructor(private createUpdateService : CreateUpdateService) {
+
+  inputMessage: any;
+  clickButton: boolean = false;
+  showNavBarToChild : boolean = true;
+  constructor(private createUpdateService: CreateUpdateService) {
   }
 
 
@@ -17,8 +20,14 @@ export class CreateUpdateComponent {
     this.clickButton = false;
     console.log('Input Text:', this.inputMessage);
     this.createUpdateService.createNewUpdate(this.inputMessage);
-    this.clickButton=true;
+    this.inputMessage=''
+
   }
 
+  showAllMessages() {
+    this.inputMessage=''
+    this.clickButton = true;
+    this.showNavBarToChild = false;
+  }
+  }
 
-}

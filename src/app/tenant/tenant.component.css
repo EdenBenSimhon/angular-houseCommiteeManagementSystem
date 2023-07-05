@@ -14,7 +14,12 @@ ul {
 li {
   display: inline;
   margin-right: 30px;
-  cursor: alias;
+
+}
+
+.hello {
+  margin-right: 30px;
+  direction: initial;
 
 }
 
@@ -25,7 +30,7 @@ a {
   height: 100vh;
   margin: 0;
   padding: 0;
-
+  cursor: pointer;
 }
 
 a:hover {

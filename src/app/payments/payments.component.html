@@ -1,1 +1,9 @@
-<p>payments works!</p>
+<app-tenant></app-tenant>
+<label>מספר דירה :
+  <a>{{paymentService.getApartmentNumber()}}</a></label>
+<h1></h1>
+<label>סכום לתשלום :<a>{{paymentAmount}}</a></label>
+<h1></h1>
+<label appPayments [defaultColor]="'yellow'" [highlightColor]="'blue'">תשלום על חודש :</label>
+
+<app-paypal></app-paypal>
