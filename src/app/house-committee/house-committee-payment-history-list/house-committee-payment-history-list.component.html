@@ -1,0 +1,12 @@
+<app-house-committee></app-house-committee>
+<label>אנא בחר מספר דירה
+<select [(ngModel)]="selectedTenant">
+    <option *ngFor="let tenant of tenantsList" [ngValue]="tenant">{{ tenant.apartment_number }}</option>
+</select>
+</label>
+
+<div class="btn-div">
+<button class="login-btn" (click)="selectOption()">אישור</button>
+</div>
+<app-payment-history [showNavBarFromParent]= "showNavBarToChild" *ngIf="clickButton"></app-payment-history>
+

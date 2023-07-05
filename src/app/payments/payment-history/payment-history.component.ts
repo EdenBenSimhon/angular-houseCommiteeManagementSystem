@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../auth/auth.service";
 import {HttpClient} from "@angular/common/http";
@@ -10,28 +10,21 @@ import {paymentHistoryInterface} from "./payment-history.interface";
   templateUrl: './payment-history.component.html',
   styleUrls: ['./payment-history.component.css']
 })
-export class PaymentHistoryComponent {
-  paymentHistoryList :any  = []
-  constructor(private router: Router, private paymentHistoryService: PaymentHistoryService, private authService: AuthService) {
+export class PaymentHistoryComponent implements OnInit{
+  @Input() showNavBarFromParent: boolean = true;
+  constructor(private router: Router, public paymentHistoryService: PaymentHistoryService, private authService: AuthService) {
   }
 
-  ngOnInit(){
-      this.paymentHistoryService.getPaymentHistory(this.authService.getCurrentUser());
-      this.addToList();
+  ngOnInit() : void {
+    //this.paymentHistoryService.getPaymentHistory();
+      console.log("show nav bar form parent : " + this.showNavBarFromParent);
+      if (this.showNavBarFromParent == true) {
+        this.paymentHistoryService.getPaymentHistoryProtected();
+      } else {
+        this.paymentHistoryService.getPaymentHistory();
+      }
+
   }
 
-  addToList() {
-    this.cleanList();
-    for (let i = 0; i < this.paymentHistoryService.payment.historyPayment.length; i++) {
-      var temp = {name : this.paymentHistoryService.payment.name
-        , apartmentNumber: this.paymentHistoryService.payment.apartmentNumber
-        ,address : this.paymentHistoryService.payment.address ,
-        paymentAmount : this.paymentHistoryService.payment.paymentAmount
-        ,historyPayment :this.paymentHistoryService.payment.historyPayment[i] }
-      this.paymentHistoryList.push(temp);
-    }
-  }
-  cleanList(){
-    this.paymentHistoryList = []
-  }
+
 }

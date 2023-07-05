@@ -1,4 +1,5 @@
 <app-house-committee></app-house-committee>
-<input type="text" [(ngModel)]="inputMessage">
-<button (click)="handleButtonClick()">Submit</button>
-<app-update *ngIf="clickButton"></app-update>
+<input class = "text" type="text" required [(ngModel)]="inputMessage"/>
+  <button appCreateUpdate (click)="handleButtonClick()">לחץ כאן כדי להוסיף את ההודעה</button>
+<button appCreateUpdate (click)="showAllMessages()">הצג את כל העדכונים</button>
+<app-update [showNavBarFromParent]= "showNavBarToChild" *ngIf="clickButton"></app-update>

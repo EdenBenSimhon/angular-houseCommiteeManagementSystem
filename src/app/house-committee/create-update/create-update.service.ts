@@ -12,7 +12,6 @@ export class CreateUpdateService {
 
   }
   public createNewUpdate(update :any) {
-    console.log(update)
     this.httpClient.post<any>('http://localhost:3000/createupdate', {message :update}, {})
       .subscribe(data => {
         console.log(data)

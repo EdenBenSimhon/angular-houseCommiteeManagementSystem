@@ -2,63 +2,84 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable, tap} from "rxjs";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {userInterface} from "./user.interface";
-var currentUser ={}  as userInterface ;
+import {SharedService} from "../shared/shared.service";
+import jwt_decode from "jwt-decode";
+export var globalCurrentUser = {} as userInterface;
+
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
-  private _user : userInterface;
-  private isAuthenticated  = false;
-  constructor(private router: Router, private httpClient :HttpClient) {
-    this._user ={} as userInterface;
+  private tokenKey = 'token';
+
+  constructor(private router: Router, private httpClient: HttpClient) {
+    // this.sharedService.getGlobalVar().subscribe(value =>{
+    //   this.globalCurrentUser = value;
+    // });
   }
 
-  public login(form :NgForm): void {
-      this.httpClient.post<userInterface>('http://localhost:3000/login', form.value, {})
-        .subscribe((data: any) => {
-          var type = data.message.type;
-          console.log(type.message)
-          if (type == 'Invalid username or password') {
-            console.log("Something wrong");
-            this.isAuthenticated = false;
-          } else {
-            this._user=data.message;
-            currentUser=this._user;
-            this.isAuthenticated = true;
-            if(type=="IsAdmin"){
-              console.log("isAdmin")
-              this.router.navigate(['/housecommitte']);
-            }
-            else {
-              console.log("isTenant")
-              this.router.navigate(['/tenant']);
-            }
-          }
-        });
-
+  public login(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
+    console.log(token)
   }
 
   public logout() {
-    this.isAuthenticated= false;
+    localStorage.removeItem(this.tokenKey);
     this.router.navigate(['/login']);
   }
 
-  getIsAuthenticated(): boolean {
-    return this.isAuthenticated;
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      const decodedToken: any = jwt_decode(token);
+      const expirationTimestamp = decodedToken.exp * 1000;
+      if (expirationTimestamp < Date.now()) {
+          this.logout();
+      }
+    }
+    return !!localStorage.getItem(this.tokenKey);
   }
 
-  public get user(): userInterface {
-    return this._user;
+  updateGlobalUser(value: userInterface) {
+    console.log(value)
+    globalCurrentUser = value;
   }
-  getCurrentUser(){
-    return currentUser;
+
+  getGlobalUser() {
+    return globalCurrentUser;
   }
-  setCurrentUser(user:userInterface){
-    currentUser=user;
+
+  getName() {
+    return globalCurrentUser.name;
+  }
+
+  getApartmentNumber() {
+    return globalCurrentUser.apartmentNumber;
+  }
+
+  getToken() {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  isAdmin(): boolean {
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      const decodedToken: any = jwt_decode(token);
+      console.log(decodedToken)
+      return decodedToken.role === 'admin';
+    }
+    return false;
+  }
+
+  getApartmentNumberFromToken() {
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      const decodedToken: any = jwt_decode(token);
+      return decodedToken.id;
+    }
   }
 
 }
+

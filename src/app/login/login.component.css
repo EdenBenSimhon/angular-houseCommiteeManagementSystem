@@ -40,3 +40,6 @@ input[type="password" i] {
   cursor: pointer;
   letter-spacing: 1px;
 }
+button:disabled{
+  filter: brightness(0.3);
+}

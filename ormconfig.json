@@ -1,0 +1,19 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5433,
+  "username": "postgres",
+  "password": "12345678",
+  "database": "housecommiteemanagmentsystem",
+  "synchronize": false,
+  "logging": true,
+  "entities": [
+    "backend/model/entities/**/*.ts"
+  ],
+  "migrations": [
+    "backend/db/typeorm/migrations/**/*.ts"
+  ],
+  "subscribers": [
+    "backend/subscribers/**/*.ts"
+  ]
+}

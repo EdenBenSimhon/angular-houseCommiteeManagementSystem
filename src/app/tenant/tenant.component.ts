@@ -20,4 +20,7 @@ export class TenantComponent {
   logout() {
     this.authService.logout();
   }
+  getNameOfUser(){
+    return this.authService.getName(); //need be observable
+  }
 }

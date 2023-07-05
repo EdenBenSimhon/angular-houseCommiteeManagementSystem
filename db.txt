@@ -7,10 +7,10 @@ CREATE TABLE Tenants (
 );
 
 INSERT INTO Tenants (email, password,name,Apartment_number ,admin )
-VALUES('test@test.com','123456','moshe',9,false);
+VALUES('ad@test.com','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsInJvbGUiOiJ0ZW5hbnQiLCJpYXQiOjE2ODgyOTIxNTIsImV4cCI6MTY4ODI5NTc1Mn0.j5UAtBESVyY8coQn_ajemKzPoPrEJpp202trgFBvZ6Y$2b$10$mIvV1EveT1Udqlnm.knCDOg0Te7KwxuDua.FegSeZAA8OmwuKGRny','eden',30,true);
 
 INSERT INTO apartments (address ,Apartment_number ,number_of_rooms,payment_amount )
-VALUES('Haifa','5','3',80);
+VALUES('Haifa','1','3',80);
 
 CREATE TABLE apartments(
 	address VARCHAR ( 255 ) NOT NULL,

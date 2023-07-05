@@ -1,6 +1,6 @@
 <div class="align-center">
   <h2>התחברות הדיירים</h2>
-  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+  <form #authForm="ngForm" (ngSubmit)="onSubmit()">
     <input
       placeholder="אימייל"
       type="email"
@@ -14,11 +14,13 @@
       type="password"
       name="password"
       [(ngModel)]="user.password"
+      required minlength="6"
     />
     <div class="btn-div">
-      <button type="submit"  class="login-btn">
+      <button type="submit" [disabled]="!authForm.valid"  class="login-btn">
         Login
       </button>
     </div>
   </form>
+  <a *ngIf="loginService.error" class="red" >{{loginService.error}}</a>
 </div>
